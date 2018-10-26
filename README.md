@@ -48,3 +48,13 @@ f.close() # in order to open the file, you have to close it first
 [Intro to Web Scraping with Python and Beautiful Soup](https://www.youtube.com/watch?v=XQgXKtPSzUI&index=2&list=LLpPP1tfgf97VIYCfXKpMCVQ&t=0s)
 
 [Scraping glassdoor and intro the Recommendation system](https://nycdatascience.com/blog/student-works/r-shiny/match-skill-job-simple-job-recommendation-system/)
+
+### Week 9 reading material
+
+[`textbox`](https://www.python-course.eu/tkinter_text_widget.php)
+
+[`Natural language tool kit`](https://www.nltk.org/)
+
+[`n-gram`](https://en.wikipedia.org/wiki/N-gram)
+
+[For webscrawling purpose `request`](http://docs.python-requests.org/en/master/user/quickstart/#make-a-request)

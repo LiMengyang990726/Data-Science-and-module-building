@@ -105,3 +105,42 @@ for lk in link:
             json.dump(info, fp)
 with open('./glassdoor/scrape_to_%d.json'%(i+1), 'w') as fp:
     json.dump(info, fp) # json.dump takes in an object and produce a string
+
+# ================================================================================
+# Jaccard similarity implementation
+# ================================================================================
+def get_bestMatch(myCV):
+    import numpy as np
+    import pandas as pd
+
+# 	/Users/williamzhou/Desktop/job_recommendation
+    gds = pd.read_json('./gds_clean.json',
+                       orient='records')
+
+    def Jaccard(x, y):
+        """returns the jaccard similarity between two lists """
+        intersection_cardinality = len(set.intersection(*[set(x), set(y)]))
+        union_cardinality = len(set.union(*[set(x), set(y)]))
+        return intersection_cardinality / float(union_cardinality)
+
+    def cal_similarity(cv):
+        similarity = []
+        for skills in gds.overall_dict:
+            similarity.append(Jaccard(cv, skills))
+
+        gds['similarity'] = similarity
+        col = ['jobtitle', 'employername', 'city', 'state', 'industry', 'companysize', 'companytype', 'link',
+               'similarity']
+        best = gds.sort_values(by='similarity', ascending=False).head(100).loc[:, col]
+        return(best)
+
+    BestMatch = cal_similarity(myCV)
+
+    return BestMatch.to_csv('./BestMatch.csv', encoding='utf-8')
+
+if __name__ == "__main__":
+    f = open('./test.txt' ,'r')
+    lst = f.readlines()
+    lst = [i.strip().encode('ascii', 'ignore') for i in lst]
+    # f.closed()
+    get_bestMatch(lst)
